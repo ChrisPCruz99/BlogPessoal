@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 // para fazer virar uma tabela
 
 @Entity
@@ -26,6 +28,7 @@ public class Postagem {
 	@NotNull
 	@Size(min = 10, max = 500)
 	public String texto;
+	@UpdateTimestamp
 	public LocalDateTime date;
 	
 	public Long getId() {
