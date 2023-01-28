@@ -37,7 +37,7 @@ public class PostagemController {
 		return repository.findById(id)
 				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-	}
+	}	
 	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<List<Postagem>> GetByYitulo(@PathVariable String titulo){
 		return ResponseEntity.ok

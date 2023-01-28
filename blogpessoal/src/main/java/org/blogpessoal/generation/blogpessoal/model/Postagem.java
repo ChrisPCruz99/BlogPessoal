@@ -5,13 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
-// para fazer virar uma tabela
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//para fazer virar uma tabela
 
 @Entity
 @Table(name="tb_postagens")
@@ -22,15 +25,25 @@ public class Postagem {
 	//auto_increment e decisão de como sera incrementado
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
-	@Size(min = 5, max = 100)
+	@NotBlank(message = "O atributo titulo é obrigatorio!")
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no minimo 05 caracteres")
 	public String titulo;
-	@NotNull
-	@Size(min = 10, max = 500)
+	@NotBlank(message = "O atributo texto é obrigatorio!")
+	@Size(min = 10, max = 500, message = "O atributo título deve conter no minimo 05 caracteres")
 	public String texto;
 	@UpdateTimestamp
 	public LocalDateTime date;
 	
+	@ManyToOne
+	@JsonIgnoreProperties ("postagem")
+	private Tema tema;
+	
+	public Tema getTema() {
+		return tema;
+	}
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
 	public Long getId() {
 		return id;
 	}
